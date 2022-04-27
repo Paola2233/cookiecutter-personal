@@ -2,6 +2,7 @@ import os
 import subprocess
 
 project_slug = "{{ cookiecutter.project_slug }}"
+project_packages = '{{ cookiecutter.project_packages }}'
 
 MESSAGE_COLOR = "\x1b[34m"
 RESET_ALL = "\x1b[0m"
@@ -9,11 +10,12 @@ RESET_ALL = "\x1b[0m"
 print(f"{MESSAGE_COLOR}Almost done!")
 
 # Creating a virtual environment for Scripts
-if '{{ cookiecutter.project_packages }}' == 'Script':
+if project_packages == 'Script':
     subprocess.call(['pip', 'install', '-r', 'requirements.txt'])
 # Creating a virtual environment for Notebooks
-if '{{ cookiecutter.project_packages }}' == 'Notebook':
-    subprocess.call(['conda', 'env', 'create','--file','environment.yml'])
+if project_packages == 'Notebook':
+    subprocess.call(['conda', 'create', '-n', project_slug])
+    subprocess.call(['mamba','env','update','-n', project_slug,'-f','environment.yml'])
     subprocess.call(['ipython','kernel', 'install', '--user', '--name', project_slug])
 
 # Initializing git repository
