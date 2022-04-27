@@ -1,0 +1,8 @@
+name: cookiecutter-personal
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - cookiecutter=1.7.3
+  - ipykernel
+prefix: /home/paola/miniconda3/envs/cookiecutter-personal
